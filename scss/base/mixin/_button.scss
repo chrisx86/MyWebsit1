@@ -1,0 +1,57 @@
+@charset "utf-8";
+
+// Button 按钮生成器
+// 生成包括 4 种状态在内的按钮
+// :hover, :focus, :active, disabled
+// 4 种显示的 class
+// .hover, .focus, :active, .disabled
+// button-variant 调整颜色：背景、边框
+
+@mixin button-variant($backgroundColor, $border: darken($backgroundColor, 10%)) {
+  @if ($border == null) {
+    $border: darken($backgroundColor, 10%);
+  }
+
+  background-color: $backgroundColor;
+  border-color: $border;
+
+  &:focus,
+  &.focus {
+    background-color: darken($backgroundColor, 10%);
+    border-color: darken($border, 25%);
+  }
+
+  &:hover,
+  &.hover {
+    background-color: darken($backgroundColor, 10%);
+    border-color: darken($border, 12%);
+  }
+
+  &:active,
+  &.active {
+    background-color: darken($backgroundColor, 10%);
+    border-color: darken($border, 12%);
+
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: darken($backgroundColor, 17%);
+      border-color: darken($border, 25%);
+    }
+  }
+
+  &:active,
+  &.active {
+    background-image: none;
+  }
+
+  &.disabled,
+  &[disabled] {
+    &:hover,
+    &:focus,
+    &.focus {
+      background-color: $backgroundColor;
+      border-color: $border;
+    }
+  }
+}

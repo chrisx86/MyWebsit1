@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+// 根据 $color-list 生成对应的色值 class
+// $color-list 格式 (name1: #111, name2: rgb(1,1,1))
+// 背景色（x-b-c-xxx）字的颜色（x-font-c-xxx）按钮的颜色（x-btn-c-xxx）表格行的颜色（x-tr-c-xxx）
+
+@mixin make-background-color($color-list) {
+  @each $name, $color in $color-list {
+    .x-bg-c-#{"" + $name} {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin make-font-color($color-list) {
+  @each $name, $color in $color-list {
+    .x-font-c-#{"" + $name} {
+      color: $color;
+    }
+  }
+}
+
+@mixin make-button-color($color-list) {
+  @each $name, $background-color, $border-color in $color-list {
+    .x-btn-c-#{"" + $name} {
+      @include button-variant($background-color, $border-color);
+    }
+  }
+}
+
+@mixin make-tr-color($color-list) {
+  @each $name, $color in $color-list {
+    @include table-row-variant(#{"x-tr-c-" + $name}, $color);
+  }
+}
